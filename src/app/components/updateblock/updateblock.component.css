@@ -64,7 +64,6 @@ img {
   position: fixed;
   right: 0;
   bottom: 0;
-  height: Calc(100vh - 115px);
 }
 
 .information-head {
