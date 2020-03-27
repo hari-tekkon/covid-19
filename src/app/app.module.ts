@@ -14,6 +14,11 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {environment} from '../environments/environment';
 import {EffectsModule} from '@ngrx/effects';
 import {MapEffects} from './effects/map.effects';
+import {reportReducer} from './reducers/report.reducers';
+import {ReportEffects} from './effects/report.effects';
+import {HttpConfigInterceptorProvider} from './core/http-interceptor.core';
+import {globalReportReducer} from './reducers/global-report.reducers';
+import {GlobalReportEffects} from './effects/global-report.effects';
 
 @NgModule({
   declarations: [
@@ -28,12 +33,16 @@ import {MapEffects} from './effects/map.effects';
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(
-      {map: mapReducer}
+      {
+        map: mapReducer,
+        report: reportReducer,
+        global_report: globalReportReducer,
+      }
     ),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot([MapEffects])
+    EffectsModule.forRoot([MapEffects, ReportEffects, GlobalReportEffects])
   ],
-  providers: [],
+  providers: [HttpConfigInterceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule {

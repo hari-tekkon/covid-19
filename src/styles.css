@@ -38,3 +38,7 @@ body {
 .head-color {
   color: #2E384D;
 }
+
+.ol-attribution {
+  display: none !important;
+}

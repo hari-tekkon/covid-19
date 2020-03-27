@@ -26,4 +26,4 @@ export class LoadDataFailure implements Action {
 export type MapAction =
   | LoadData
   | LoadDataSuccess
-  | LoadDataFailure
+  | LoadDataFailure;

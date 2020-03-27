@@ -1,11 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {MapData} from '../../models/map.models';
-import {select, Store} from '@ngrx/store';
-import {MapState} from '../../reducers/map.reducers';
-import {AppState} from '../../models/app-state.models';
-import {LoadData, LoadDataSuccess} from '../../actions/map.actions';
+import {Store} from '@ngrx/store';
+import {AppState, AppStateReport, GlobalAppStateReport} from '../../models/app-state.models';
+import {LoadData} from '../../actions/map.actions';
 import {getListState, getLoadingState} from '../../selectors/map.selectors';
+import {ReportData} from '../../actions/report.actions';
+import {Report} from '../../models/report.models';
+import {getReportState, getRListState, getRLoadingState} from '../../selectors/report.selectors';
+import {isEmpty} from 'rxjs/operators';
+import {getGRListState} from '../../selectors/global-report.selectors';
+import {GlobalReportData} from '../../actions/global-report.actions';
 
 
 @Component({
@@ -16,27 +21,47 @@ import {getListState, getLoadingState} from '../../selectors/map.selectors';
 export class UpdateblockComponent implements OnInit {
   showInfo: boolean = false;
   mapData$: Observable<MapData[]>;
+  reportData$: Observable<Report[]>;
   loading$: Observable<Boolean>;
+  RLoading$: Observable<Boolean>;
   information;
+  report;
+  globalReport;
 
-  constructor(private store: Store<{ map: AppState }>) {
+  constructor(private store: Store<{ map: AppState, report: AppStateReport, global_report: GlobalAppStateReport }>) {
   }
 
   ngOnInit(): void {
-    // this.store.pipe(select('map')).subscribe(data => {
-    //   this.information = data;
-    //   console.log(this.information);
-    // });
+    //  for map data
     this.store.select(getListState).subscribe(data => {
       this.information = data;
-      console.log(this.information);
+      if (data.length !== 0) {
+        this.store.dispatch(new ReportData(data['address'].country));
+        this.store.dispatch(new GlobalReportData());
+        this.RLoading$ = this.store.select(getRLoadingState);
+
+      }
     });
     this.loading$ = this.store.select(getLoadingState);
     this.store.dispatch(new LoadData([85.01220703125, 28.594168506232606]));
+
+    //for report
+    this.store.select(getRListState).subscribe(data => {
+      this.report = data;
+    });
+
+    //for global report
+    this.store.select(getGRListState).subscribe(data => {
+      this.globalReport = data;
+    });
+
   }
 
   mapClicked($event) {
+    this.report = {};
+    this.globalReport = {};
     this.store.dispatch(new LoadData($event));
+
     this.showInfo = true;
   }
 }
