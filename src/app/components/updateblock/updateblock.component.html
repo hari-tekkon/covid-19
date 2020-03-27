@@ -156,7 +156,7 @@
   <div class="mt-2 col-lg-6 col-md-12 information" *ngIf="showInfo">
     <div class="rounded bg-bluelight h-100 overflow-hidden">
       <div class="mt-2 col-lg-12 col-md-12">
-        <div *ngIf="loading$ && RLoading$ | async" class="loader"></div>
+        <div *ngIf="loading$ && RLoading$ && GRLoading$ | async" class="loader"></div>
         <div class="rounded bg-bluelight p-4 h-100">
           <div class="mb-3 border-bottom pb-2">
             <div class="d-inline-block wi-100">
@@ -171,8 +171,14 @@
           <div class="clearfix"></div>
           <div class="mb-3 row">
             <div class="col-6">
-              <div class="font-weight-bold h5">{{information['address']['country']}} Update</div>
-              <div class="mb-3 small-xs">({{information['address']['country']}} Govt. reported numbers)</div>
+              <div
+                class="font-weight-bold h5">{{information.error !== "Unable to geocode" ? information['address']['country'] : ""}}
+                Update
+              </div>
+              <div class="mb-3 small-xs">
+                ({{information.error !== "Unable to geocode" ? information['address']['country'] : ""}} Govt. reported
+                numbers)
+              </div>
               <div class="invisible">
                 <div class="">Total Tested</div>
                 <div class="h3 m-0 font-weight-bold  d-inline-block">687</div>

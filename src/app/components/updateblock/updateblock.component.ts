@@ -9,7 +9,7 @@ import {ReportData} from '../../actions/report.actions';
 import {Report} from '../../models/report.models';
 import {getReportState, getRListState, getRLoadingState} from '../../selectors/report.selectors';
 import {isEmpty} from 'rxjs/operators';
-import {getGRListState} from '../../selectors/global-report.selectors';
+import {getGRListState, getGRLoadingState} from '../../selectors/global-report.selectors';
 import {GlobalReportData} from '../../actions/global-report.actions';
 
 
@@ -22,8 +22,9 @@ export class UpdateblockComponent implements OnInit {
   showInfo: boolean = false;
   mapData$: Observable<MapData[]>;
   reportData$: Observable<Report[]>;
-  loading$: Observable<Boolean>;
-  RLoading$: Observable<Boolean>;
+  loading$: Observable<boolean>;
+  RLoading$: Observable<boolean>;
+  GRLoading$: Observable<boolean>;
   information;
   report;
   globalReport;
@@ -35,10 +36,13 @@ export class UpdateblockComponent implements OnInit {
     //  for map data
     this.store.select(getListState).subscribe(data => {
       this.information = data;
-      if (data.length !== 0) {
+      console.log(this.information.error !== 'Unable to geocode');
+
+      if (this.information.error !== 'Unable to geocode' && data.length !== 0) {
         this.store.dispatch(new ReportData(data['address'].country));
         this.store.dispatch(new GlobalReportData());
         this.RLoading$ = this.store.select(getRLoadingState);
+        this.GRLoading$ = this.store.select(getGRLoadingState);
 
       }
     });
