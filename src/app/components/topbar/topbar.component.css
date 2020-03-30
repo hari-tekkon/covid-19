@@ -37,7 +37,6 @@ a {
 
 .navbar-dark {
   background: white !important;
-  top: 26px !important;
 }
 
 .fixed-top {
@@ -50,6 +49,9 @@ a {
 
 .navbar-dark .navbar-brand {
   color: #8798AD;
+  background-image: url("/assets/images/logo.png");
+  background-repeat: no-repeat;
+  width: 200px;
 }
 
 .font-weight-bold {

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 declare var ol: any;
 
@@ -14,10 +14,18 @@ export class MapComponent implements OnInit {
   latitude = 85.01220703125;
   longitude = 28.594168506232606;
   @Output() mapClickEvent: EventEmitter<any> = new EventEmitter();
+  @Output() crossClickedEvent: EventEmitter<any> = new EventEmitter();
+  @Input() globalReport;
+  @Input() showInfo: boolean = false;
+  @Input() loading$;
+  @Input() RLoading$;
+  @Input() information;
+  @Input() report;
 
   ngOnInit() {
-    // const tiles_url = `https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png`;
-    const tiles_url = `https://a.tile.openstreetmap.org/{z}/{x}/{y}.png`;
+    // const tiles_url = `https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang=en`;
+    const tiles_url = `https://c.tile.openstreetmap.org/{z}/{x}/{y}.png`;
+    // const tiles_url = `https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png`;
     var markerStyle = new ol.style.Style({
       image: new ol.style.Icon(({
         anchorXUnits: 'fraction',
@@ -64,5 +72,10 @@ export class MapComponent implements OnInit {
     this.map.on('pointermove', function(e) {
       e.map.getTargetElement().style.cursor = this ? ' url(\'./assets/images/marker.png\') 12 24, auto' : '';
     });
+  }
+
+  cross() {
+    this.showInfo = !this.showInfo;
+    this.crossClickedEvent.emit(this.showInfo);
   }
 }

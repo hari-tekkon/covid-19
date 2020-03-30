@@ -35,8 +35,6 @@ export class UpdateblockComponent implements OnInit {
     //  for map data
     this.store.select(getListState).subscribe(data => {
       this.information = data;
-      console.log(this.information.error !== 'Unable to geocode');
-
       if (this.information.error !== 'Unable to geocode' && data.length !== 0) {
         this.store.dispatch(new ReportData(data['address'].country));
         this.store.dispatch(new GlobalReportData());
@@ -65,5 +63,9 @@ export class UpdateblockComponent implements OnInit {
     this.globalReport = {};
     this.store.dispatch(new LoadData($event));
     this.showInfo = true;
+  }
+
+  cross($event) {
+    this.showInfo = $event;
   }
 }
