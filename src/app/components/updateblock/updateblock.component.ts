@@ -7,8 +7,7 @@ import {LoadData} from '../../actions/map.actions';
 import {getListState, getLoadingState} from '../../selectors/map.selectors';
 import {ReportData} from '../../actions/report.actions';
 import {Report} from '../../models/report.models';
-import {getReportState, getRListState, getRLoadingState} from '../../selectors/report.selectors';
-import {isEmpty} from 'rxjs/operators';
+import {getRListState, getRLoadingState} from '../../selectors/report.selectors';
 import {getGRListState, getGRLoadingState} from '../../selectors/global-report.selectors';
 import {GlobalReportData} from '../../actions/global-report.actions';
 
@@ -65,7 +64,6 @@ export class UpdateblockComponent implements OnInit {
     this.report = {};
     this.globalReport = {};
     this.store.dispatch(new LoadData($event));
-
     this.showInfo = true;
   }
 }
