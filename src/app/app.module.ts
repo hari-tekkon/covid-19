@@ -19,6 +19,7 @@ import {ReportEffects} from './effects/report.effects';
 import {HttpConfigInterceptorProvider} from './core/http-interceptor.core';
 import {globalReportReducer} from './reducers/global-report.reducers';
 import {GlobalReportEffects} from './effects/global-report.effects';
+import { BottombarComponent } from './components/bottombar/bottombar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import {GlobalReportEffects} from './effects/global-report.effects';
     UpdateblockComponent,
     TableblockComponent,
     MapComponent,
+    BottombarComponent,
   ],
   imports: [
     BrowserModule,
