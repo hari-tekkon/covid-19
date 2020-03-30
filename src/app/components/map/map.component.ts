@@ -46,7 +46,7 @@ export class MapComponent implements OnInit {
       ],
       view: new ol.View({
         center: ol.proj.fromLonLat([this.latitude, this.longitude]),
-        zoom: 5,
+        zoom: 3,
         minZoom: 3,
         maxZoom: 6
       })
