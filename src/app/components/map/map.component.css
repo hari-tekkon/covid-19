@@ -1,5 +1,6 @@
 .map {
   width: 100%;
+  position: relative;
   height: Calc(100vh - 212px);
 }
 
@@ -20,7 +21,7 @@
 
 .course-action-enroll {
   color: white;
-  background-color: #0b72b5;
+  background-color: #2E5BFF;
 }
 
 .course-actions a:hover, .course-actions a:focus {
@@ -54,6 +55,7 @@
   margin-bottom: 0px !important;
   vertical-align: middle;
 }
+
 .information {
   position: absolute;
   /*left: 0;*/
@@ -96,21 +98,49 @@
   position: absolute;
 }
 
-/* Safari */
-@-webkit-keyframes spin {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
+.sidebar-menu {
+  position: absolute;
+  top: 52px;
+  right: 0;
+  z-index: 9999;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+.testing-form {
+  position: absolute;
+  top: 0;
+  width: 60%;
+  z-index: 9999;
 }
+
+.checkboxWrapper {
+  width: 24px;
+  float: left;
+}
+
+.custom-checkbox {
+  display: none !important;
+}
+
+.custom-checkbox {
+  background-image: url('/assets/images/checkbox.svg');
+  background-position: -1px;
+  background-size: auto 100%;
+  width: 26px;
+  height: 25px;
+  background-repeat: no-repeat;
+  float: left;
+  cursor: pointer;
+}
+
+.custom-checkbox:checked + .custom-checkbox {
+  background-image: url('/assets/images/checked_checkbox.svg');
+  background-position: left center;
+  background-size: auto 100%;
+  width: 26px;
+  height: 25px;
+  background-repeat: no-repeat;
+  float: left;
+  cursor: pointer;
+
+}
+

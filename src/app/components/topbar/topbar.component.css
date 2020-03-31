@@ -52,6 +52,7 @@ a {
   background-image: url("/assets/images/logo.png");
   background-repeat: no-repeat;
   width: 200px;
+  height: 36px;
 }
 
 .font-weight-bold {
@@ -123,4 +124,12 @@ a {
 .nav-link {
   display: block;
   padding: .5rem 1rem;
+}
+
+.menu-btn {
+  cursor: pointer;
+}
+.menu-btn img{
+  margin-right: 10px;
+
 }

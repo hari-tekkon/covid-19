@@ -13,6 +13,8 @@ export class MapComponent implements OnInit {
   markerSource = new ol.source.Vector();
   latitude = 85.01220703125;
   longitude = 28.594168506232606;
+  showTesting: boolean = false;
+
   @Output() mapClickEvent: EventEmitter<any> = new EventEmitter();
   @Output() crossClickedEvent: EventEmitter<any> = new EventEmitter();
   @Input() globalReport;
@@ -21,6 +23,8 @@ export class MapComponent implements OnInit {
   @Input() RLoading$;
   @Input() information;
   @Input() report;
+  @Input() menuClicked;
+
 
   ngOnInit() {
     // const tiles_url = `https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png?lang=en`;
@@ -70,7 +74,7 @@ export class MapComponent implements OnInit {
       this.mapClickEvent.emit(lonLat);
     });
     this.map.on('pointermove', function(e) {
-      e.map.getTargetElement().style.cursor = this ? ' url(\'./assets/images/marker.png\') 12 24, auto' : '';
+      e.map.getTargetElement().style.cursor = this ? 'pointer' : '';
     });
   }
 

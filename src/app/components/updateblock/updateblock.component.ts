@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {MapData} from '../../models/map.models';
 import {Store} from '@ngrx/store';
@@ -18,7 +18,7 @@ import {GlobalReportData} from '../../actions/global-report.actions';
   styleUrls: ['./updateblock.component.css']
 })
 export class UpdateblockComponent implements OnInit {
-  showInfo: boolean = false;
+  showInfo: boolean = true;
   mapData$: Observable<MapData[]>;
   reportData$: Observable<Report[]>;
   loading$: Observable<boolean>;
@@ -27,6 +27,8 @@ export class UpdateblockComponent implements OnInit {
   information;
   report;
   globalReport;
+  @Input() menuClicked;
+
 
   constructor(private store: Store<{ map: AppState, report: AppStateReport, global_report: GlobalAppStateReport }>) {
   }
